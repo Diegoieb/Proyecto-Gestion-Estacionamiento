@@ -24,6 +24,7 @@ public class EstacionamientoResController {
     @Autowired
     IEstacionamientoService estacionamiento;
 
+    //el map es para json
     @GetMapping("/estacionamientos")
     public ResponseEntity<?> index(){
         Map<String,Object> response = new HashMap<>();
