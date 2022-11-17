@@ -15,8 +15,6 @@ public class ServicioEscaneo extends Servicio {
 	
 	private int precio;
 	
-	
-	
 	//para cuando llame al metodo no se llame de forma infinita, para que no se llamen entre si infinitamente
 	//value=para el arreglo
 	@JsonIgnoreProperties(value = {"serviciosVulcanizacion","hibernateLazyInitializer","handler"}, allowSetters = true)
@@ -29,12 +27,28 @@ public class ServicioEscaneo extends Servicio {
     @JoinColumn(name="id_trabajador", referencedColumnName="id")
     private Trabajador trabajador;
 
+	public boolean isOcupado() {
+		return ocupado;
+	}
+
+	public void setOcupado(boolean ocupado) {
+		this.ocupado = ocupado;
+	}
+
 	public int getPrecio() {
 		return precio;
 	}
 
 	public void setPrecio(int precio) {
 		this.precio = precio;
+	}
+
+	public Estacionamiento getEstacionamiento() {
+		return estacionamiento;
+	}
+
+	public void setEstacionamiento(Estacionamiento estacionamiento) {
+		this.estacionamiento = estacionamiento;
 	}
 
 	public Trabajador getTrabajador() {
@@ -63,6 +77,8 @@ public class ServicioEscaneo extends Servicio {
 		super(id);
 		// TODO Auto-generated constructor stub
 	}
+
+	
 	
 	
 
