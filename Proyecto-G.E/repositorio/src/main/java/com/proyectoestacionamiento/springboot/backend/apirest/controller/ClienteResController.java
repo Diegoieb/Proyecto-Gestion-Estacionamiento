@@ -8,7 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,6 +45,55 @@ public class ClienteResController {
 
         response.put("clientes", clientes);
         return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
+    }
+    
+    @PostMapping("/clientes")
+    public ResponseEntity<?> guardarCliente(@RequestBody Cliente cliente) {
+        Map<String, Object> response = new HashMap<>();
+        Cliente cliente1 = null;
+        try {
+            cliente1 = clienteService.save(cliente);
+            response.put("Ok", cliente);
+        } catch (Exception e) {
+            response.put("Mensaje", "Error al realizar la consulta en la base de datos " + e.getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/clientes")
+    public ResponseEntity<?> actualizarCliente(@RequestBody Cliente cliente) {
+        Map<String, Object> response = new HashMap<>();
+        Cliente cliente2, cliente3 = null;
+        int id = Math.toIntExact(cliente.getId());
+        try {
+            cliente2 = clienteService.findById(id);
+            cliente2.setDireccion(cliente.getDireccion());
+            cliente2.setNombre(cliente.getNombre());
+            cliente2.setNumero(cliente.getNumero());
+            cliente2.setRut(cliente.getRut());
+            cliente2.setVehiculos(cliente.getVehiculos());
+            cliente3 = clienteService.save(cliente2);
+            response.put("Ok", cliente3);// respuesta
+        } catch (Exception e) {
+            response.put("Mensaje", "Error al realizar la consulta en la base de datos " + e.getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/clientes/{id}")
+    public ResponseEntity<?> eliminarPersona(@PathVariable int id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            clienteService.delete(id);
+            response.put("Ok", null);
+        } catch (Exception e) {
+            response.put("Mensaje", "Error al realizar la consulta en la base de datos " + e.getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+
     }
 
 }
