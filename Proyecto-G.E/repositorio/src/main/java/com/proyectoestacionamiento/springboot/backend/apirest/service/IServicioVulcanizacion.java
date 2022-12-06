@@ -1,13 +1,12 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.service;
 
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.ServicioVulcanizacion;
-
-import java.util.List;
+import org.springframework.http.ResponseEntity;
 
 
 public interface IServicioVulcanizacion {
 
-	List<ServicioVulcanizacion> findAll();
+	ResponseEntity<?> findAll();
 
 	ServicioVulcanizacion save(ServicioVulcanizacion ServicioVulcanizacion);
 

@@ -1,9 +1,8 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.repository;
 
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Vehiculo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Vehiculo;
-
-public interface IvehiculoRepository extends JpaRepository<Vehiculo, Integer> {
+public interface IVehiculoRepository extends JpaRepository<Vehiculo, Integer> {
 
 }

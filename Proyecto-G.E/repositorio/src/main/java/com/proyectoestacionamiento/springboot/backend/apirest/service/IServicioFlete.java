@@ -1,16 +1,15 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.service;
 
-import java.util.List;
-
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.ServicioFlete;
+import org.springframework.http.ResponseEntity;
 
 public interface IServicioFlete {
 
-	public List<ServicioFlete> findAll();
-	
-	public ServicioFlete save(ServicioFlete ServicioFlete);
-	
-	public ServicioFlete findById(Integer id);
-	
-	public void delete(Integer id);
+	ResponseEntity<?> findAll();
+
+	ServicioFlete save(ServicioFlete ServicioFlete);
+
+	ServicioFlete findById(Integer id);
+
+	void delete(Integer id);
 }
