@@ -1,18 +1,16 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.service;
 
-import java.util.List;
-
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Vehiculo;
-
+import org.springframework.http.ResponseEntity;
 
 
 public interface IVehiculoService {
 
-	public List<Vehiculo> findAll();
-	
-	public Vehiculo save(Vehiculo vehiculo);
-	
-	public Vehiculo findById(Integer id);
-	
-	public void delete(Integer id);
+	ResponseEntity<?> findAll();
+
+	ResponseEntity<?> save(Vehiculo vehiculo);
+
+	Vehiculo findById(Integer id);
+
+	void delete(Integer id);
 }
