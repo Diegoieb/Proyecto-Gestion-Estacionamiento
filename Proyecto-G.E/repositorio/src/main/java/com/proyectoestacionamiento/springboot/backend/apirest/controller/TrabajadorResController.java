@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,5 +45,17 @@ public class TrabajadorResController {
         return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
     }
 
-
+    @PostMapping("/trabajadores")
+    public ResponseEntity<?> guardarTrabajador(@RequestBody Trabajador trabajador){
+        Map<String, Object> response= new HashMap<>();
+        Trabajador trabajador1= null;
+        try{
+            trabajador1= trabajaroService.save(trabajador);
+            response.put("OK", trabajador1);
+        }catch(Exception e){
+            response.put("Mensaje", "Erro al realizar la consulta en la base de datos"+ e.getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+    }
 }
