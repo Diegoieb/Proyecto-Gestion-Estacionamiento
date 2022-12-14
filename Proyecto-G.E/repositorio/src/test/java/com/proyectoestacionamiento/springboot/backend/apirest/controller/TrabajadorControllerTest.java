@@ -84,6 +84,42 @@ public class TrabajadorControllerTest {
 
         verify(trabajadorService).findAll();
     }
-	
-	
+
+	@Test
+	void createTrabajadorTest() throws  Exception {
+
+		//Given
+		Trabajador alguien = new trabajador(1, "Mateo", 56949566790,  "Padorulandia","19.414.677-7");
+		when(trabajadorService.save(any())).thenReturn(alguien);
+
+
+		//When
+		mvc.perform(post("/trabajadores")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(alguien)))
+
+				//then
+				.andExpect(status().isCreated())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.trabajador.nombre").value("Mateo"));
+
+	}
+	@Test
+	void createTrabajadorTestNoValido() throws  Exception {
+
+		//Given
+		Trabajador alguien = new trabajador(1, "Mateo", 56949566790,  "Padorulandia","19.414.677-7");
+
+
+		//When
+		mvc.perform(post("/trabajadores")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(alguien)))
+
+				//then
+				.andExpect(status().isBadRequest())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
+	}
+
 }

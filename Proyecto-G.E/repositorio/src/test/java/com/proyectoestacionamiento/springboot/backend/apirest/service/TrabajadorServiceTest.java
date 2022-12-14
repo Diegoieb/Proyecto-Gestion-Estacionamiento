@@ -55,4 +55,26 @@ public class TrabajadorServiceTest {
         verify(trabajadorRepository).findAll();
     }
 
+	@Test
+	void saveTrabajador() {
+
+		//given
+
+		Trabajador alguien = new trabajador(1, "Mateo", 56949566790,  "Padorulandia","19.414.677-7");
+		when(autorRepository.save(any())).then(invocation -> {
+			Trabajador a = invocation.getArgument(0);
+			// se setea el id del autor nuevo que venga en este caso pablo
+			a.setId(Long.valueOf(3));
+			return a;
+		});
+
+		//when
+		Trabajador trabajadorPrueba = trabajadorService.save(alguien);
+		//then
+		assertEquals(Long.valueOf(3), trabajadorPrueba.getId());
+		assertEquals("Mateo", trabajadorPrueba.getNombre());
+
+		verify(trabajadorRepository).save(any());
+	}
+
 }
