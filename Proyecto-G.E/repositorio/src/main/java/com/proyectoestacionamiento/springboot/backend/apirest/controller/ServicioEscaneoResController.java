@@ -19,7 +19,7 @@ import com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioE
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping("/apiEstacionamiento")
-public class ServicioEscaneoRestController {
+public class ServicioEscaneoResController {
 
     @Autowired
     IServicioEscaneoService servicioEscaneo;
