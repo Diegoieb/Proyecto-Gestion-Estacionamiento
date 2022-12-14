@@ -1,19 +1,19 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.service;
 
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Estacionamiento;
-import org.springframework.http.ResponseEntity;
+import java.util.List;
 
-import java.util.Map;
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Estacionamiento;
+
 
 
 public interface IEstacionamientoService {
 	
-	ResponseEntity<Map<String, Object>> findAll();
+	public List<Estacionamiento> findAll();
 	
-	Estacionamiento save(Estacionamiento estacionamiento);
+	public Estacionamiento save(Estacionamiento estacionamiento);
 	
-	Estacionamiento findById(Integer id);
+	public Estacionamiento findById(Integer id);
 	
-	void delete(Integer id);
+	public void delete(Integer id);
 
 }
