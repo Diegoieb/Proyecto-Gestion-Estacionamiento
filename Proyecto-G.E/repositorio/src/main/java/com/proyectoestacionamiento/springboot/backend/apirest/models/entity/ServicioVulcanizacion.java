@@ -61,6 +61,8 @@ public class ServicioVulcanizacion extends Servicio{
 		this.trabajador = trabajador;
 	}
 
+
+
 	public ServicioVulcanizacion(Long id, boolean ocupado, int precio, Estacionamiento estacionamiento,
 			Trabajador trabajador) {
 		super(id);

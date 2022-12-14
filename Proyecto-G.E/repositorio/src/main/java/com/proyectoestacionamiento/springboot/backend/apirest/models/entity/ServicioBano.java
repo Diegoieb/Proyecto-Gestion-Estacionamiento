@@ -12,23 +12,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class ServicioBano extends Servicio {
 	
 	private boolean ocupado;
-
-	public boolean isOcupado() {
-		return ocupado;
-	}
-
-	public void setOcupado(boolean ocupado) {
-		this.ocupado = ocupado;
-	}
-
-	public ServicioBano(Long id, boolean ocupado) {
-		super(id);
-		this.ocupado = ocupado;
-	}
-
-	public ServicioBano() {
-		// TODO Auto-generated constructor stub
-	}
 	
 	//para cuando llame al metodo no se llame de forma infinita, para que no se llamen entre si infinitamente
 	//value=para el arreglo
@@ -41,6 +24,47 @@ public class ServicioBano extends Servicio {
     @ManyToOne()
     @JoinColumn(name="id_trabajador", referencedColumnName="id")
     private Trabajador trabajador;
+
+	public boolean isOcupado() {
+		return ocupado;
+	}
+
+	public void setOcupado(boolean ocupado) {
+		this.ocupado = ocupado;
+	}
+
+	public Estacionamiento getEstacionamiento() {
+		return estacionamiento;
+	}
+
+	public void setEstacionamiento(Estacionamiento estacionamiento) {
+		this.estacionamiento = estacionamiento;
+	}
+
+	public Trabajador getTrabajador() {
+		return trabajador;
+	}
+
+	public void setTrabajador(Trabajador trabajador) {
+		this.trabajador = trabajador;
+	}
+
+	public ServicioBano(Long id, boolean ocupado, Estacionamiento estacionamiento, Trabajador trabajador) {
+		super(id);
+		this.ocupado = ocupado;
+		this.estacionamiento = estacionamiento;
+		this.trabajador = trabajador;
+	}
+
+	public ServicioBano() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ServicioBano(Long id) {
+		super(id);
+		// TODO Auto-generated constructor stub
+	}
 		
 
 	

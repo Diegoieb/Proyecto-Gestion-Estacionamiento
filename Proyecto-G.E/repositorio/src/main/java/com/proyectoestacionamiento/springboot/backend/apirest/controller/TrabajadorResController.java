@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,7 +32,7 @@ public class TrabajadorResController {
         try {
             trabajador = trabajaroService.findAll();
             response.put("ok", true);
-        } catch (Exception e) {
+        } catch (DataAccessException e) {
             // TODO: handle exception
             response.put("Mensaje","Error al realizar la consulta en la base de datos");
             response.put("ok", false);

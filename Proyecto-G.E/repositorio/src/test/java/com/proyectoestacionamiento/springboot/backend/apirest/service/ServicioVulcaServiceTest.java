@@ -21,7 +21,7 @@ import com.proyectoestacionamiento.springboot.backend.apirest.repository.Iservic
 
 
 @SpringBootTest
-public class ServicioVulcanizacionServiceTest {
+public class ServicioVulcaServiceTest {
 	
 	
 	@Mock

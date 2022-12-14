@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Service
-public class ServicioVulcanizacionlmpl implements com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioVulcanizacion {
+public class ServicioVulcanizacionlmpl implements com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioVulcanizacionService {
 
 
 	@Autowired

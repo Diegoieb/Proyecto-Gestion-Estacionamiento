@@ -2,6 +2,7 @@ package com.proyectoestacionamiento.springboot.backend.apirest.controller;
 
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.ServicioVulcanizacion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,7 +20,7 @@ import java.util.Map;
 public class ServicioVulcanizacionResController {
 
     @Autowired
-    com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioVulcanizacion servicioVulcanizacion;
+    com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioVulcanizacionService servicioVulcanizacion;
 
     @GetMapping("/servioVulcanizacion")
     public ResponseEntity<?> index() {
@@ -28,9 +29,9 @@ public class ServicioVulcanizacionResController {
         try {
             listaServicio = servicioVulcanizacion.findAll();
             response.put("ok", true);
-        } catch (Exception e) {
+        } catch (DataAccessException e) {
             // TODO: handle exception
-            response.put("mensaje", "Error al realizar la consulta en la base de datos");
+            response.put("Mensaje", "Error al realizar la consulta en la base de datos");
             response.put("ok", false);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }

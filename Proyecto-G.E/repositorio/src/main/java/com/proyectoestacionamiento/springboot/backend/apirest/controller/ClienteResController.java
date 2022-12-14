@@ -37,7 +37,7 @@ public class ClienteResController {
         try {
             clientes = clienteService.findAll();
             response.put("ok", true);
-            //RECORDAR CAMBIAR EN LOS OTROS CONTROLLER
+            
         } catch (DataAccessException e) {
             // TODO: handle exception
             response.put("Mensaje","Error al realizar la consulta en la base de datos");
@@ -48,6 +48,35 @@ public class ClienteResController {
         response.put("clientes", clientes);
         return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
     }
+    
+    
+	@GetMapping("/clientes/{id}")
+	public ResponseEntity<?> show(@PathVariable int id) {
+		Cliente clientes = null;
+		
+		Map<String, Object>  response = new HashMap<>();
+		try {
+			clientes = clienteService.findById(id);
+			
+		}catch(RuntimeException e) {
+			response.put("mensaje", "error al realizar la consulta en la base de datos");
+			response.put("ok", false);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+			
+		}
+		
+		if(clientes == null) {
+			response.put("ok", false);
+			response.put("mensaje", "El cliente no se encuentra");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
+		response.put("cliente", clientes);
+		response.put("ok", true);
+		
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
+    
     
     @PostMapping("/clientes")
     public ResponseEntity<?> guardarCliente(@RequestBody Cliente cliente) {
