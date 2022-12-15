@@ -2,6 +2,7 @@ package com.proyectoestacionamiento.springboot.backend.apirest.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -60,10 +61,10 @@ public class TrabajadorServiceTest {
 
 		//given
 
-		Trabajador alguien = new trabajador(1, "Mateo", 56949566790,  "Padorulandia","19.414.677-7");
-		when(autorRepository.save(any())).then(invocation -> {
+		Trabajador alguien = new Trabajador(1l, "Mateo", 569496790,  "Padorulandia","19.414.677-7");
+		when(trabajadorRepository.save(any())).then(invocation -> {
 			Trabajador a = invocation.getArgument(0);
-			// se setea el id del autor nuevo que venga en este caso pablo
+
 			a.setId(Long.valueOf(3));
 			return a;
 		});

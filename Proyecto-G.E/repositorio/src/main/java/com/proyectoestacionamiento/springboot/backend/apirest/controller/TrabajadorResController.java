@@ -52,7 +52,7 @@ public class TrabajadorResController {
         try{
             trabajador1= trabajaroService.save(trabajador);
             response.put("OK", trabajador1);
-        }catch(Exception e){
+        }catch(DataAccessException e){
             response.put("Mensaje", "Erro al realizar la consulta en la base de datos"+ e.getMessage());
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
         }

@@ -1,8 +1,10 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.controller;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -89,7 +91,7 @@ public class TrabajadorControllerTest {
 	void createTrabajadorTest() throws  Exception {
 
 		//Given
-		Trabajador alguien = new trabajador(1, "Mateo", 56949566790,  "Padorulandia","19.414.677-7");
+		Trabajador alguien = new Trabajador(1l, "Esteban", 56949590,  "Padorulandia","19.414.677-7");
 		when(trabajadorService.save(any())).thenReturn(alguien);
 
 
@@ -99,16 +101,16 @@ public class TrabajadorControllerTest {
 						.content(objectMapper.writeValueAsString(alguien)))
 
 				//then
-				.andExpect(status().isCreated())
+				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.trabajador.nombre").value("Mateo"));
+				.andExpect(jsonPath("$.trabajador.nombre").value("Esteban"));
 
 	}
 	@Test
 	void createTrabajadorTestNoValido() throws  Exception {
 
 		//Given
-		Trabajador alguien = new trabajador(1, "Mateo", 56949566790,  "Padorulandia","19.414.677-7");
+		Trabajador alguien = new Trabajador(1l, "Mateo", 569495690,  "Padorulandia","19.414.677-7");
 
 
 		//When
@@ -116,6 +118,7 @@ public class TrabajadorControllerTest {
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(alguien)))
 
+		
 				//then
 				.andExpect(status().isBadRequest())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
