@@ -96,7 +96,7 @@ public class TrabajadorControllerTest {
 
 
 		//When
-		mvc.perform(post("/trabajadores")
+		mvc.perform(post("/apiEstacionamiento/trabajadores")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(alguien)))
 
@@ -114,7 +114,7 @@ public class TrabajadorControllerTest {
 
 
 		//When
-		mvc.perform(post("/trabajadores")
+		mvc.perform(post("/apiEstacionamiento/trabajadores")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(alguien)))
 
