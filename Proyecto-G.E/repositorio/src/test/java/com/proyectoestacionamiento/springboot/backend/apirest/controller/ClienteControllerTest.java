@@ -1,8 +1,10 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.controller;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,6 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Cliente;
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Trabajador;
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Vehiculo;
 import com.proyectoestacionamiento.springboot.backend.apirest.service.IClienteService;
 
@@ -44,7 +47,7 @@ public class ClienteControllerTest {
 	
 	@BeforeEach
 	void setup() {
-		cliente1= new Cliente(1L, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
+		cliente1= new Cliente(1L, "Esteban",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
 		cliente2= new Cliente(2L, "Giovanni",129182991, "Calle tu papa", "6666666-6",new HashSet<Vehiculo>());
 		//para cuando quieres escribir en el json
 		objectMapper = new ObjectMapper();
@@ -85,6 +88,41 @@ public class ClienteControllerTest {
 
         verify(clienteService).findAll();
     }
+	
+	//save()
+	@Test
+	void createClienteTest() throws  Exception {
+
+		//Given
+		
+		when(clienteService.save(any())).thenReturn(cliente1);
+
+		//When
+		mvc.perform(post("/apiEstacionamiento/clientes")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(cliente1)))
+
+				//then
+				.andExpect(status().isCreated())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.trabajador.nombre").value("Esteban"));
+
+	}
+	@Test
+	void createClienteTestNoValido() throws  Exception {
+
+		//Given
+		
+		//When
+		when(clienteService.save(any())).thenThrow(new DataAccessException("...") {});
+		mvc.perform(post("/apiEstacionamiento/clientes")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(cliente1)))
+				//then
+				.andExpect(status().isBadRequest())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
+	}
 	
 	
 }

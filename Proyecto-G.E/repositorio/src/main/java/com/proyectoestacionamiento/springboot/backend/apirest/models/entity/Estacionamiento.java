@@ -32,6 +32,8 @@ public class Estacionamiento implements Serializable{
 	private int precioPorMinuto;
 	
 	//falta la relacion 
+	
+	
 
 	public int getIdEstacionamiento() {
 		return id;

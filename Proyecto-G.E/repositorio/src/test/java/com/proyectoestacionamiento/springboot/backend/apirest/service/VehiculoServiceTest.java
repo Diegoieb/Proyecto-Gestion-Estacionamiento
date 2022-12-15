@@ -2,10 +2,12 @@ package com.proyectoestacionamiento.springboot.backend.apirest.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Cliente;
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Vehiculo;
 import com.proyectoestacionamiento.springboot.backend.apirest.repository.IvehiculoRepository;
 
@@ -32,7 +35,8 @@ public class VehiculoServiceTest {
 	 @BeforeEach
 	  void setup () {
 		 vehiculo1 = new Vehiculo();
-		 vehiculo2 = new Vehiculo();	 
+		 vehiculo2 = new Vehiculo();
+		 
 	 }
 	 
 	 @Test
@@ -54,4 +58,25 @@ public class VehiculoServiceTest {
 	     verify(vehiculoRepository).findAll();
 	
 	 }
+	 
+		@Test
+		void saveVehiculo() {
+			Cliente cliente1 = new Cliente(1L, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
+			
+			//given
+
+			vehiculo1= new Vehiculo(1, "DL-DZ-31","rojo","chery", true,cliente1);
+			when(vehiculoRepository.save(any())).then(invocation -> {
+				Vehiculo a = invocation.getArgument(0);
+				return a;
+			});
+
+			//when
+			Vehiculo trabajadorPrueba = vehiculoService.save(vehiculo1);
+			//then
+			assertEquals(Long.valueOf(1), trabajadorPrueba.getId());
+			assertEquals("DL-DZ-31", trabajadorPrueba.getPatente());
+
+			verify(vehiculoRepository).save(any());
+		}
 }

@@ -18,8 +18,7 @@ public class EstacionamientoServicelmpl implements IEstacionamientoService{
 	@Override
 	public List<Estacionamiento> findAll() {
 		// TODO Auto-generated method stub
-		servicioEstacionamiento.findAll();
-		return null;
+		return servicioEstacionamiento.findAll();
 	}
 
 	@Override
@@ -32,7 +31,6 @@ public class EstacionamientoServicelmpl implements IEstacionamientoService{
 	@Override
 	public Estacionamiento findById(Integer id) {
 		// TODO Auto-generated method stub
-		//falta el orElse(null)
 		servicioEstacionamiento.findById(id).orElse(null);
 		return null;
 	}

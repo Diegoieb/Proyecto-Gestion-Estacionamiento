@@ -51,6 +51,7 @@ public class TrabajadorControllerTest {
 		objectMapper = new ObjectMapper();
 	}
 	
+	//findAll()
 	@Test
 	void indexTest() throws Exception {
 		// given
@@ -87,6 +88,8 @@ public class TrabajadorControllerTest {
         verify(trabajadorService).findAll();
     }
 
+	
+	//save()
 	@Test
 	void createTrabajadorTest() throws  Exception {
 
@@ -101,7 +104,7 @@ public class TrabajadorControllerTest {
 						.content(objectMapper.writeValueAsString(alguien)))
 
 				//then
-				.andExpect(status().isOk())
+				.andExpect(status().isCreated())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.trabajador.nombre").value("Esteban"));
 
@@ -114,6 +117,7 @@ public class TrabajadorControllerTest {
 
 
 		//When
+		when(trabajadorService.save(any())).thenThrow(new DataAccessException("...") {});
 		mvc.perform(post("/apiEstacionamiento/trabajadores")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(alguien)))

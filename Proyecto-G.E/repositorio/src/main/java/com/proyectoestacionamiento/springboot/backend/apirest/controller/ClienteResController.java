@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Cliente;
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Trabajador;
 import com.proyectoestacionamiento.springboot.backend.apirest.service.IClienteService;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
@@ -79,6 +80,21 @@ public class ClienteResController {
     
     
     @PostMapping("/clientes")
+    public ResponseEntity<?> guardarTrabajador(@RequestBody Cliente cliente){
+        Map<String, Object> response= new HashMap<>();
+        Cliente cliente1= null;
+        try{
+        	cliente1= clienteService.save(cliente);
+            response.put("trabajador", cliente1);
+        }catch(DataAccessException e){
+            response.put("Mensaje", "Erro al realizar la consulta en la base de datos"+ e.getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+    }
+	
+	/*
+    @PostMapping("/clientes")
     public ResponseEntity<?> guardarCliente(@RequestBody Cliente cliente) {
         Map<String, Object> response = new HashMap<>();
         Cliente cliente1 = null;
@@ -91,7 +107,7 @@ public class ClienteResController {
         }
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
-
+	 */
     @PutMapping("/clientes")
     public ResponseEntity<?> actualizarCliente(@RequestBody Cliente cliente) {
         Map<String, Object> response = new HashMap<>();

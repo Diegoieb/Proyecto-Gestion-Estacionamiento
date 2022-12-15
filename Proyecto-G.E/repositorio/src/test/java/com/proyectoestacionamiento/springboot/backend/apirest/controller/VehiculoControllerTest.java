@@ -1,8 +1,10 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.controller;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -48,7 +50,7 @@ public class VehiculoControllerTest {
 	void setup() {
 		cliente1= new Cliente(1L, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
 		vehiculo1= new Vehiculo(1, "DL-DZ-31","rojo","chery", true,cliente1);
-		vehiculo1= new Vehiculo(1, "DL-DZ-32","azul","azurian", false,cliente1);
+		vehiculo2= new Vehiculo(1, "DL-DZ-32","azul","azurian", false,cliente1);
 
 		//para cuando quieres escribir en el json
 		objectMapper = new ObjectMapper();
@@ -91,4 +93,39 @@ public class VehiculoControllerTest {
     }
 	
 	
+	//save()
+
+	@Test
+	void createVehiculoTest() throws  Exception {
+
+		//Given
+		
+		when(vehiculoService.save(any())).thenReturn(vehiculo1);
+
+		//When
+		mvc.perform(post("/apiEstacionamiento/vehiculos")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(vehiculo1)))
+
+				//then
+				.andExpect(status().isCreated())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.vehiculo.patente").value("DL-DZ-31"));
+	
+	}
+	@Test
+	void createClienteTestNoValido() throws  Exception {
+
+		//Given
+		
+		//When
+		when(vehiculoService.save(any())).thenThrow(new DataAccessException("...") {});
+		mvc.perform(post("/apiEstacionamiento/vehiculos")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(vehiculo1)))
+				//then
+				.andExpect(status().isBadRequest())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
+	}
 }

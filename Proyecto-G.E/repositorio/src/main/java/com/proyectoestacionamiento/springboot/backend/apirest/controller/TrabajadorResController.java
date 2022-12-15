@@ -51,10 +51,10 @@ public class TrabajadorResController {
         Trabajador trabajador1= null;
         try{
             trabajador1= trabajaroService.save(trabajador);
-            response.put("OK", trabajador1);
+            response.put("trabajador", trabajador1);
         }catch(DataAccessException e){
             response.put("Mensaje", "Erro al realizar la consulta en la base de datos"+ e.getMessage());
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }

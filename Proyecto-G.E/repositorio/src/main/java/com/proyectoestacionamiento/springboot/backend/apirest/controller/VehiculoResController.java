@@ -44,17 +44,17 @@ public class VehiculoResController {
 
     }
     
-    @PostMapping("vehiculos")
+    @PostMapping("/vehiculos")
     public ResponseEntity<?> agregaVehiculo(@RequestBody Vehiculo vehiculo) {
         Map<String, Object> response = new HashMap<>();
         Vehiculo vehiculo2 = null;
         try {
             vehiculo2 = vehiculoService.save(vehiculo);
-            response.put("Ok", vehiculo2);
-        } catch (Exception e) {
-            response.put("mensaje", "Error al realizar la consulta en la base de datos");
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_IMPLEMENTED);
+            response.put("vehiculo", vehiculo2);
+        } catch (DataAccessException e) {
+            response.put("mensaje", "Error al realizar la consulta en la base de datos"+ e.getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
 }
