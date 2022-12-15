@@ -1,0 +1,30 @@
+# Default ignored files
+/shelf/
+/.idea/workspace.xml
+/.idea
+/.out
+/out
+*.iml
+
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+#otros
+*.target/
+/target/
