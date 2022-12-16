@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Cliente;
@@ -25,7 +26,7 @@ import com.proyectoestacionamiento.springboot.backend.apirest.service.IClienteSe
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping("/apiEstacionamiento")
-public class ClienteResController {
+public class ClienteRestController {
 
     @Autowired
     IClienteService clienteService;
@@ -143,4 +144,23 @@ public class ClienteResController {
 
     }
 
+/*
+    @DeleteMapping("/clientes/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public ResponseEntity<?> delete(@PathVariable int id) {
+		Map<String, Object>  response = new HashMap<>();
+		
+		try {
+			
+			clienteService.delete(id);
+			response.put("Ok", null);
+		} catch (DataAccessException e) {
+			// TODO: handle exception
+			response.put("Mensaje", "error al eliminar el autor de la base de datos"+e.getMessage());;
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
+		}
+		response.put("Mensaje", "Cliente eliminado con exito!");
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
+ 	*/
 }

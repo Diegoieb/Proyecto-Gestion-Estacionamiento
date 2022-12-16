@@ -30,7 +30,7 @@ import com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioV
 
 
 //para hacer las llamadas http
-@WebMvcTest(ServicioFleteResController.class)
+@WebMvcTest(ServicioFleteRestController.class)
 public class ServicioFleteControllerTest {
 
 

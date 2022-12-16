@@ -13,24 +13,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Estacionamiento;
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.ServicioBano;
-import com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioBanoService;
+import com.proyectoestacionamiento.springboot.backend.apirest.service.IEstacionamientoService;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping("/apiEstacionamiento")
-public class ServicioBanoResController {
-
+public class EstacionamientoRestController {
 
     @Autowired
-    IServicioBanoService banoService;
+    IEstacionamientoService estacionamiento;
 
-    @GetMapping("/servicioBano")
+    @GetMapping("/estacionamientos")
     public ResponseEntity<?> index(){
         Map<String,Object> response = new HashMap<>();
-        List<ServicioBano> listaServicio = null;
+        List<Estacionamiento> ListaEstacionamientos = null;
         try {
-            listaServicio = banoService.findAll();
+            ListaEstacionamientos = estacionamiento.findAll();
             response.put("ok", true);
         } catch (DataAccessException e) {
             // TODO: handle exception
@@ -38,8 +38,9 @@ public class ServicioBanoResController {
             response.put("ok", false);
             return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
         }
-        response.put("servicioBano", listaServicio);
+        response.put("estacionamientos", ListaEstacionamientos);
         return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 
     }
+
 }

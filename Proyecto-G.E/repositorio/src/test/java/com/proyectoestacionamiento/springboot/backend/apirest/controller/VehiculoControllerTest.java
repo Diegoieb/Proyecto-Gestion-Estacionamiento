@@ -30,7 +30,7 @@ import com.proyectoestacionamiento.springboot.backend.apirest.service.IVehiculoS
 
 
 //para hacer las llamadas http
-@WebMvcTest(VehiculoResController.class)
+@WebMvcTest(VehiculoRestController.class)
 public class VehiculoControllerTest {
 
 	

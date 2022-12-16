@@ -29,7 +29,7 @@ import com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioE
 
 
 //para hacer las llamadas http
-@WebMvcTest(ServicioEscaneoResController.class)
+@WebMvcTest(ServicioEscaneoRestController.class)
 public class ServicioEscaneoControllerTest {
 
 

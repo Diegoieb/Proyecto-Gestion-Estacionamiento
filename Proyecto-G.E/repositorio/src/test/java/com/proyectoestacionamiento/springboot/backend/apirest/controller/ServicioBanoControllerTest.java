@@ -31,7 +31,7 @@ import com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioE
 
 
 //para hacer las llamadas http
-@WebMvcTest(ServicioBanoResController.class)
+@WebMvcTest(ServicioBanoRestController.class)
 public class ServicioBanoControllerTest {
 
 

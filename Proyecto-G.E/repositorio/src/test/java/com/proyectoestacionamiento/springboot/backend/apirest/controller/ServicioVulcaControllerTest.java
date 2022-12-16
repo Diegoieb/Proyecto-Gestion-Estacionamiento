@@ -28,7 +28,7 @@ import com.proyectoestacionamiento.springboot.backend.apirest.service.IEstaciona
 import com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioVulcanizacionService;
 
 //para hacer las llamadas http
-@WebMvcTest(ServicioVulcanizacionResController.class)
+@WebMvcTest(ServicioVulcanizacionRestController.class)
 public class ServicioVulcaControllerTest {
 
 

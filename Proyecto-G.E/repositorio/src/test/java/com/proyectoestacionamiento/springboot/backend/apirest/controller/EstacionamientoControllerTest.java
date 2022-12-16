@@ -25,7 +25,7 @@ import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Esta
 import com.proyectoestacionamiento.springboot.backend.apirest.service.IEstacionamientoService;
 
 //para hacer las llamadas http
-@WebMvcTest(EstacionamientoResController.class)
+@WebMvcTest(EstacionamientoRestController.class)
 public class EstacionamientoControllerTest {
 	
 

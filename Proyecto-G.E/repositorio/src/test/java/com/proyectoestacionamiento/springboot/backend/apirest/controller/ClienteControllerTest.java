@@ -29,7 +29,7 @@ import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Vehi
 import com.proyectoestacionamiento.springboot.backend.apirest.service.IClienteService;
 
 //para hacer las llamadas http
-@WebMvcTest(ClienteResController.class)
+@WebMvcTest(ClienteRestController.class)
 public class ClienteControllerTest {
 
 	

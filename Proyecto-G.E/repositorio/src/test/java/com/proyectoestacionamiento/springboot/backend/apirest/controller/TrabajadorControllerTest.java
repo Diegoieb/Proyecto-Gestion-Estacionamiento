@@ -27,7 +27,7 @@ import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Trab
 import com.proyectoestacionamiento.springboot.backend.apirest.service.ITrabajadorService;
 
 //para hacer las llamadas http
-@WebMvcTest(TrabajadorResController.class)
+@WebMvcTest(TrabajadorRestController.class)
 public class TrabajadorControllerTest {
 
 	

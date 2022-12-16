@@ -10,26 +10,28 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.ServicioFlete;
-import com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioFleteService;
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Vehiculo;
+import com.proyectoestacionamiento.springboot.backend.apirest.service.IVehiculoService;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping("/apiEstacionamiento")
-public class ServicioFleteResController {
+public class VehiculoRestController {
 
     @Autowired
-    IServicioFleteService servicioFlete;
+    IVehiculoService vehiculoService;
 
-    @GetMapping("/servicioFlete")
+    @GetMapping("/vehiculos")
     public ResponseEntity<?> index(){
         Map<String,Object> response = new HashMap<>();
-        List<ServicioFlete> listaServicio = null;
+        List<Vehiculo> vehiculos = null;
         try {
-            listaServicio = servicioFlete.findAll();
+            vehiculos = vehiculoService.findAll();
             response.put("ok", true);
         } catch (DataAccessException e) {
             // TODO: handle exception
@@ -37,8 +39,22 @@ public class ServicioFleteResController {
             response.put("ok", false);
             return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
         }
-        response.put("servicioFlete", listaServicio);
+        response.put("vehiculos", vehiculos);
         return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 
+    }
+    
+    @PostMapping("/vehiculos")
+    public ResponseEntity<?> agregaVehiculo(@RequestBody Vehiculo vehiculo) {
+        Map<String, Object> response = new HashMap<>();
+        Vehiculo vehiculo2 = null;
+        try {
+            vehiculo2 = vehiculoService.save(vehiculo);
+            response.put("vehiculo", vehiculo2);
+        } catch (DataAccessException e) {
+            response.put("mensaje", "Error al realizar la consulta en la base de datos"+ e.getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
 }
