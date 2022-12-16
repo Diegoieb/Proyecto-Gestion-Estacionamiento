@@ -25,7 +25,7 @@ public class EstacionamientoServiceTest {
 	IEstacionamientoRepository estacionamientoRepository;
 	
 	@InjectMocks
-	EstacionamientoServicelmpl estacionamientoService;
+	EstacionamientoServiceImpl estacionamientoService;
 	
 	Estacionamiento estacionamiento1;
 	Estacionamiento estacionamiento2;

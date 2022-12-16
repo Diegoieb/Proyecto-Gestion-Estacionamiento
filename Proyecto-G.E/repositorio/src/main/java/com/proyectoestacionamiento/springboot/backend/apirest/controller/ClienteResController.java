@@ -80,7 +80,7 @@ public class ClienteResController {
     
     
     @PostMapping("/clientes")
-    public ResponseEntity<?> guardarTrabajador(@RequestBody Cliente cliente){
+    public ResponseEntity<?> guardarCliente(@RequestBody Cliente cliente){
         Map<String, Object> response= new HashMap<>();
         Cliente cliente1= null;
         try{

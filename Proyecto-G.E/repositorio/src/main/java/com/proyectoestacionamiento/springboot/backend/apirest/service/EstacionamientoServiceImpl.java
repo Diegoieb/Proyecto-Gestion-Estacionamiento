@@ -9,7 +9,7 @@ import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Esta
 import com.proyectoestacionamiento.springboot.backend.apirest.repository.IEstacionamientoRepository;
 
 @Service
-public class EstacionamientoServicelmpl implements IEstacionamientoService{
+public class EstacionamientoServiceImpl implements IEstacionamientoService{
 
 	
 	@Autowired
