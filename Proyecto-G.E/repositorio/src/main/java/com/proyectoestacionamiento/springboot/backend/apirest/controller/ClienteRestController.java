@@ -86,9 +86,9 @@ public class ClienteRestController {
         Cliente cliente1= null;
         try{
         	cliente1= clienteService.save(cliente);
-            response.put("trabajador", cliente1);
+            response.put("Cliente", cliente1);
         }catch(DataAccessException e){
-            response.put("Mensaje", "Erro al realizar la consulta en la base de datos"+ e.getMessage());
+            response.put("Mensaje", "Error al realizar la consulta en la base de datos"+ e.getMessage());
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);

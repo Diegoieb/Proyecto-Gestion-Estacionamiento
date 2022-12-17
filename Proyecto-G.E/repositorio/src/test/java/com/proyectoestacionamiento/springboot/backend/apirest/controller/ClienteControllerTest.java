@@ -1,10 +1,9 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.controller;
 
+import static java.lang.Integer.valueOf;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -47,8 +46,8 @@ public class ClienteControllerTest {
 	
 	@BeforeEach
 	void setup() {
-		cliente1= new Cliente(1L, "Esteban",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
-		cliente2= new Cliente(2L, "Giovanni",129182991, "Calle tu papa", "6666666-6",new HashSet<Vehiculo>());
+		cliente1= new Cliente(1, "Esteban",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
+		cliente2= new Cliente(2, "Giovanni",129182991, "Calle tu papa", "6666666-6",new HashSet<Vehiculo>());
 		//para cuando quieres escribir en el json
 		objectMapper = new ObjectMapper();
 	}
@@ -123,6 +122,18 @@ public class ClienteControllerTest {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
 	}
-	
-	
+
+	@Test
+	void deleteClienteTest() throws Exception {
+
+		//Given
+		doNothing().when(clienteService).delete(any());
+
+		//when
+		mvc.perform(delete("/apiEstacionamiento/clientes/1")
+						.contentType(MediaType.APPLICATION_JSON))
+				//then
+				.andExpect(status().isOk());
+	}
+
 }

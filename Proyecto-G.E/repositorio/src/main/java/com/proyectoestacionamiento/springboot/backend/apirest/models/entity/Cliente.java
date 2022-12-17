@@ -29,7 +29,7 @@ public class Cliente implements Serializable{
 	//Atributo
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 	
 	//Atributo el @NotEmpty es para los string
 	@NotEmpty
@@ -54,11 +54,11 @@ public class Cliente implements Serializable{
     @OneToMany(mappedBy = "cliente")
     private Set<Vehiculo> vehiculos = new HashSet<Vehiculo>();
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -102,7 +102,7 @@ public class Cliente implements Serializable{
 		this.vehiculos = vehiculos;
 	}
 
-	public Cliente(Long id, @NotEmpty String nombre, @NotNull int numero, @NotEmpty String direccion,
+	public Cliente(int id, @NotEmpty String nombre, @NotNull int numero, @NotEmpty String direccion,
 			@NotEmpty String rut, Set<Vehiculo> vehiculos) {
 		super();
 		this.id = id;

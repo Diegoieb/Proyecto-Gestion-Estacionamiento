@@ -1,10 +1,10 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.service;
 
+import static java.lang.Integer.valueOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -65,11 +65,11 @@ public class ClienteServiceTest {
 
 		//given
 
-		Cliente alguien = new Cliente(1l, "Mateo", 569496790,"Padorulandia","19.414.677-7",new HashSet<Vehiculo>());
+		Cliente alguien = new Cliente(1, "Mateo", 569496790,"Padorulandia","19.414.677-7",new HashSet<Vehiculo>());
 		when(clienteRepository.save(any())).then(invocation -> {
 			Cliente a = invocation.getArgument(0);
 
-			a.setId(Long.valueOf(3));
+			a.setId(valueOf(3));
 			return a;
 		});
 
@@ -81,6 +81,10 @@ public class ClienteServiceTest {
 
 		verify(clienteRepository).save(any());
 	}
-
-
+    @Test
+    void DeleleClienteTest() {
+        doNothing().when(clienteRepository).deleteById(any());
+        clienteService.delete(valueOf(1));
+        verify(clienteRepository).deleteById(any());
+    }
 }
