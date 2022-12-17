@@ -1,14 +1,12 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.controller;
 
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Cliente;
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.ServicioVulcanizacion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,5 +36,18 @@ public class ServicioVulcanizacionRestController {
         response.put("servicioVulcanizacion", listaServicio);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
+    }
+    @PostMapping("/servioVulcanizacion")
+    public ResponseEntity<?> guardarVulca(@RequestBody ServicioVulcanizacion servicioVulcanizacion2){
+        Map<String, Object> response= new HashMap<>();
+        ServicioVulcanizacion servicioVulcanizacion1= null;
+        try{
+            servicioVulcanizacion1= servicioVulcanizacion.save(servicioVulcanizacion2);
+            response.put("trabajador", servicioVulcanizacion1);
+        }catch(DataAccessException e){
+            response.put("Mensaje", "Erro al realizar la consulta en la base de datos"+ e.getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
 }

@@ -1,8 +1,10 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.controller;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -96,6 +98,40 @@ public class ServicioVulcaControllerTest {
 
         verify(vulcanizacionService).findAll();
     }
+
+
+	@Test
+	void createVulcaTest() throws  Exception {
+
+		//Given
+
+		when(vulcanizacionService.save(any())).thenReturn(vulcanizacion1);
+
+		//When
+		mvc.perform(post("/apiEstacionamiento/servioVulcanizacion")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(vulcanizacion1)))
+
+				//then
+				.andExpect(status().isCreated())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
+	}
+	@Test
+	void createVulcaTestNoValido() throws  Exception {
+
+		//Given
+
+		//When
+		when(vulcanizacionService.save(any())).thenThrow(new DataAccessException("...") {});
+		mvc.perform(post("/apiEstacionamiento/servioVulcanizacion")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(vulcanizacion1)))
+				//then
+				.andExpect(status().isBadRequest())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
+	}
 	
 	
 }
