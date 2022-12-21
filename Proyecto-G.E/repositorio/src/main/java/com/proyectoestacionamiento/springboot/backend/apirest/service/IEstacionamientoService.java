@@ -1,9 +1,9 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.service;
 
-import java.util.List;
-
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Estacionamiento;
+import org.springframework.http.ResponseEntity;
 
+import java.util.List;
 
 
 public interface IEstacionamientoService {
@@ -16,4 +16,5 @@ public interface IEstacionamientoService {
 	
 	public void delete(Integer id);
 
+	ResponseEntity<?> obtenerEstacionamientosDiscapacitados();
 }
