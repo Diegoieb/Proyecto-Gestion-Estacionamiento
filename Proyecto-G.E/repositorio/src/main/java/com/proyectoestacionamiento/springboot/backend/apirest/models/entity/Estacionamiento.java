@@ -1,14 +1,8 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.models.entity;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity 
 @Table(name = "estacionamiento") 
@@ -19,21 +13,22 @@ public class Estacionamiento implements Serializable{
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "discapacitados")
 	private boolean discapacitado;
-	
+
 	@NotNull
 	@Column(name = "capacidad")
 	private int cantidad;
-	
+
 	@NotNull
 	@Column(name = "precio_por_minuto")
 	private int precioPorMinuto;
-	
-	//falta la relacion 
-	
-	
+
+
+	//private ArrayList<Reseña> reseñas;
+
+	//falta la relacion
 
 	public int getIdEstacionamiento() {
 		return id;
