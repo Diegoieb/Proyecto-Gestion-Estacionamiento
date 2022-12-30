@@ -1,24 +1,23 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Cliente;
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Vehiculo;
+import com.proyectoestacionamiento.springboot.backend.apirest.repository.IvehiculoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Cliente;
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Vehiculo;
-import com.proyectoestacionamiento.springboot.backend.apirest.repository.IvehiculoRepository;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class VehiculoServiceTest {
@@ -61,7 +60,7 @@ public class VehiculoServiceTest {
 	 
 		@Test
 		void saveVehiculo() {
-			Cliente cliente1 = new Cliente(1L, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
+			Cliente cliente1 = new Cliente(1, "Gabriel", 128718728, "Calle tu mama", "1111111-1", new HashSet<Vehiculo>());
 			
 			//given
 
