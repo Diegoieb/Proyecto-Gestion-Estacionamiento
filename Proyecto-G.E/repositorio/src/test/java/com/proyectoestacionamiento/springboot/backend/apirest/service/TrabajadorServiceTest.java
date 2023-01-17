@@ -61,11 +61,11 @@ public class TrabajadorServiceTest {
 
 		//given
 
-		Trabajador alguien = new Trabajador(1l, "Mateo", 569496790,  "Padorulandia","19.414.677-7");
+		Trabajador alguien = new Trabajador(1, "Mateo", 569496790,  "Padorulandia","19.414.677-7");
 		when(trabajadorRepository.save(any())).then(invocation -> {
 			Trabajador a = invocation.getArgument(0);
 
-			a.setId(Long.valueOf(3));
+			a.setId(3);
 			return a;
 		});
 

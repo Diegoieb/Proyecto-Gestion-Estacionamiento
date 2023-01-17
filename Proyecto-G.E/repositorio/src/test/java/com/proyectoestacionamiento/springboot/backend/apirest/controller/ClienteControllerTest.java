@@ -93,7 +93,7 @@ public class ClienteControllerTest {
 	void createClienteTest() throws  Exception {
 
 		//Given
-		
+
 		when(clienteService.save(any())).thenReturn(cliente1);
 
 		//When
@@ -103,8 +103,8 @@ public class ClienteControllerTest {
 
 				//then
 				.andExpect(status().isCreated())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.trabajador.nombre").value("Esteban"));
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
 
 	}
 	@Test

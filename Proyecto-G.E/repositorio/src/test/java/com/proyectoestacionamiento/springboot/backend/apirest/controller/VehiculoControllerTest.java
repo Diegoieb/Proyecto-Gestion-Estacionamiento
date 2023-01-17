@@ -48,7 +48,7 @@ public class VehiculoControllerTest {
 	
 	@BeforeEach
 	void setup() {
-		cliente1= new Cliente(1L, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
+		cliente1= new Cliente(1, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
 		vehiculo1= new Vehiculo(1, "DL-DZ-31","rojo","chery", true,cliente1);
 		vehiculo2= new Vehiculo(1, "DL-DZ-32","azul","azurian", false,cliente1);
 

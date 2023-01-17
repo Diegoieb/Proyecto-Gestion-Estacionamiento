@@ -55,7 +55,7 @@ public class ServicioFleteControllerTest {
 	
 	@BeforeEach
 	void setup() {
-		trabajador1= new Trabajador(1L, "Esteban",128718728 ,"Calle tu mama", "1111111-1");
+		trabajador1= new Trabajador(1, "Esteban",128718728 ,"Calle tu mama", "1111111-1");
 		estacionamiento1= new Estacionamiento(1,true,100,23);
 		flete1= new ServicioFlete(1l,true,1000,estacionamiento1,trabajador1);
 		flete2= new ServicioFlete(2l,false,100,estacionamiento1,trabajador1);

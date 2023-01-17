@@ -45,8 +45,8 @@ public class TrabajadorControllerTest {
 	
 	@BeforeEach
 	void setup() {
-		trabajador1= new Trabajador(1L, "Esteban",128718728 ,"Calle tu mama", "1111111-1");
-		trabajador2= new Trabajador(2L, "Pedro",129182991, "Calle tu papa", "6666666-6");
+		trabajador1= new Trabajador(1, "Esteban",128718728 ,"Calle tu mama", "1111111-1");
+		trabajador2= new Trabajador(2, "Pedro",129182991, "Calle tu papa", "6666666-6");
 		//para cuando quieres escribir en el json
 		objectMapper = new ObjectMapper();
 	}
@@ -94,7 +94,7 @@ public class TrabajadorControllerTest {
 	void createTrabajadorTest() throws  Exception {
 
 		//Given
-		Trabajador alguien = new Trabajador(1l, "Esteban", 56949590,  "Padorulandia","19.414.677-7");
+		Trabajador alguien = new Trabajador(1, "Esteban", 56949590,  "Padorulandia","19.414.677-7");
 		when(trabajadorService.save(any())).thenReturn(alguien);
 
 
@@ -113,7 +113,7 @@ public class TrabajadorControllerTest {
 	void createTrabajadorTestNoValido() throws  Exception {
 
 		//Given
-		Trabajador alguien = new Trabajador(1l, "Mateo", 569495690,  "Padorulandia","19.414.677-7");
+		Trabajador alguien = new Trabajador(1, "Mateo", 569495690,  "Padorulandia","19.414.677-7");
 
 
 		//When

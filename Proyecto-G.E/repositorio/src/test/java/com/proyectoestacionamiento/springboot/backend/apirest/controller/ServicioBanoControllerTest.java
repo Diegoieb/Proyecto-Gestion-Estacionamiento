@@ -56,7 +56,7 @@ public class ServicioBanoControllerTest {
 	
 	@BeforeEach
 	void setup() {
-		trabajador1= new Trabajador(1L, "Esteban",128718728 ,"Calle tu mama", "1111111-1");
+		trabajador1= new Trabajador(1, "Esteban",128718728 ,"Calle tu mama", "1111111-1");
 		
 		estacionamiento1= new Estacionamiento(1,true,100,23);
 		

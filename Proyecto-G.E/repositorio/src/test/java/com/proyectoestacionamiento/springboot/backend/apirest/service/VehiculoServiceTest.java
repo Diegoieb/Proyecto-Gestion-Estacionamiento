@@ -61,7 +61,7 @@ public class VehiculoServiceTest {
 	 
 		@Test
 		void saveVehiculo() {
-			Cliente cliente1 = new Cliente(1L, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
+			Cliente cliente1 = new Cliente(1, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
 			
 			//given
 

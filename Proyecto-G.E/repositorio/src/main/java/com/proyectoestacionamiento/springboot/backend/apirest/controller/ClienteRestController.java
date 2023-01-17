@@ -28,6 +28,17 @@ import com.proyectoestacionamiento.springboot.backend.apirest.service.IClienteSe
 @RequestMapping("/apiEstacionamiento")
 public class ClienteRestController {
 
+	/*
+	agregar vehiculo
+	 {"id":6,"patente":"dl-dz-32","color":"rojo" ,"marca":"Chery","automatico":true,"cliente":{"id": 1,"nombre": "esteban",
+"numero": 931712977,"direccion": "psj 1 1212","rut": "20.077.627-5"}}
+	agregar cliente	
+	
+	agregar trabajador
+	{"id": 1,"nombre": "esteban","numero": 931712977,"direccion": "psj 1 1212","rut": "20.077.627-5"}
+	*/
+	
+	
     @Autowired
     IClienteService clienteService;
 
@@ -135,7 +146,7 @@ public class ClienteRestController {
         Map<String, Object> response = new HashMap<>();
         try {
             clienteService.delete(id);
-            response.put("Ok", null);
+            response.put("Ok", "cliente eliminado");
         } catch (Exception e) {
             response.put("Mensaje", "Error al realizar la consulta en la base de datos " + e.getMessage());
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
@@ -163,4 +174,6 @@ public class ClienteRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
  	*/
+    
+	
 }

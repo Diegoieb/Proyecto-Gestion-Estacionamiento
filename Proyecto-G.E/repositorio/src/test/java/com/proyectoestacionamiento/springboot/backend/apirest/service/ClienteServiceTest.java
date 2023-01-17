@@ -76,7 +76,7 @@ public class ClienteServiceTest {
 		//when
 		Cliente trabajadorPrueba = clienteService.save(alguien);
 		//then
-		assertEquals(Long.valueOf(3), trabajadorPrueba.getId());
+		assertEquals(valueOf(3), trabajadorPrueba.getId());
 		assertEquals("Mateo", trabajadorPrueba.getNombre());
 
 		verify(clienteRepository).save(any());

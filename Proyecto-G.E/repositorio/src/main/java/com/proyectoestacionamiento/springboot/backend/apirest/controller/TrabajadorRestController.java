@@ -64,21 +64,17 @@ public class TrabajadorRestController {
     
     
     @DeleteMapping("/trabajadores/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public ResponseEntity<?> delete(@PathVariable int id) {
-		Map<String, Object>  response = new HashMap<>();
-		
-		try {
-			
-			trabajaroService.delete(id);
-			response.put("Ok", null);
-		} catch (DataAccessException e) {
-			// TODO: handle exception
-			response.put("Mensaje", "error al eliminar el autor de la base de datos"+e.getMessage());;
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); 
-		}
-		response.put("Mensaje", "Cliente eliminado con exito!");
-		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
-	}
+    public ResponseEntity<?> eliminarPersona(@PathVariable int id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            trabajaroService.delete(id);
+            response.put("Ok", "trabajador eliminado");
+        } catch (Exception e) {
+            response.put("Mensaje", "Error al realizar la consulta en la base de datos " + e.getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+
+    }
  	
 }
