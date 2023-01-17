@@ -25,7 +25,7 @@ public class Trabajador implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 	
 	@Column(nullable = false, unique = true)
 	private String nombre;
@@ -40,11 +40,11 @@ public class Trabajador implements Serializable{
 	private String rut;
 	
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -80,7 +80,7 @@ public class Trabajador implements Serializable{
 		this.rut = rut;
 	}
 
-	public Trabajador(Long id, String nombre, @NotNull int numero, @NotEmpty String direccion, @NotEmpty String rut) {
+	public Trabajador(int id, String nombre, @NotNull int numero, @NotEmpty String direccion, @NotEmpty String rut) {
 		super();
 		this.id = id;
 		this.nombre = nombre;

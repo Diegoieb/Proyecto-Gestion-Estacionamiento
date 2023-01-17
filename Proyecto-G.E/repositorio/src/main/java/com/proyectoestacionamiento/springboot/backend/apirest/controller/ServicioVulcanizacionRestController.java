@@ -37,6 +37,27 @@ public class ServicioVulcanizacionRestController {
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
+    
+     @PostMapping("/servioVulcanizacion/{id}")
+    public ResponseEntity<?> actualizarVulcanizacion(@RequestBody ServicioVulcanizacion servV) {
+        Map<String, Object> response = new HashMap<>();
+        ServicioVulcanizacion servV2, servV3 = null;
+        int id = Math.toIntExact(servV.getId());
+        try {
+            servV2 = servicioVulcanizacion.findById(id);
+            servV2.setOcupado(servV.isOcupado());
+            servV2.setPrecio(servV.getPrecio());
+            servV2.setEstacionamiento(servV.getEstacionamiento());
+            servV2.setTrabajador(servV.getTrabajador());
+            servV3 = servicioVulcanizacion.save(servV2);
+            response.put("Ok", servV3);// respuesta
+        } catch (Exception e) {
+            response.put("Mensaje", "Error al realizar la consulta en la base de datos " + e.getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+    }
+    
     @PostMapping("/servioVulcanizacion")
     public ResponseEntity<?> guardarVulca(@RequestBody ServicioVulcanizacion servicioVulcanizacion2){
         Map<String, Object> response= new HashMap<>();
@@ -45,7 +66,7 @@ public class ServicioVulcanizacionRestController {
             servicioVulcanizacion1= servicioVulcanizacion.save(servicioVulcanizacion2);
             response.put("trabajador", servicioVulcanizacion1);
         }catch(DataAccessException e){
-            response.put("Mensaje", "Erro al realizar la consulta en la base de datos"+ e.getMessage());
+            response.put("Mensaje", "Error al realizar la consulta en la base de datos"+ e.getMessage());
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
