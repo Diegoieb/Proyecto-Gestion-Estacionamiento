@@ -1,27 +1,16 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Cliente;
+import com.proyectoestacionamiento.springboot.backend.apirest.service.IClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Cliente;
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Trabajador;
-import com.proyectoestacionamiento.springboot.backend.apirest.service.IClienteService;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController

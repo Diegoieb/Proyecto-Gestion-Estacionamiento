@@ -57,8 +57,8 @@ public class ServicioVulcaControllerTest {
 	void setup() {
 		trabajador1= new Trabajador(1, "Esteban",128718728 ,"Calle tu mama", "1111111-1");
 		estacionamiento1= new Estacionamiento(1,true,100,23);
-		vulcanizacion1= new ServicioVulcanizacion(1l,true,1000,estacionamiento1,trabajador1);
-		vulcanizacion2= new ServicioVulcanizacion(2l,false,100,estacionamiento1,trabajador1);
+		vulcanizacion1= new ServicioVulcanizacion(1,true,1000,estacionamiento1,trabajador1);
+		vulcanizacion2= new ServicioVulcanizacion(2,false,100,estacionamiento1,trabajador1);
 		//para cuando quieres escribir en el json
 		objectMapper = new ObjectMapper();
 	}
@@ -117,6 +117,27 @@ public class ServicioVulcaControllerTest {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
 	}
+        
+        @Test
+	void modifyVulcaTest() throws  Exception {
+
+		//Given
+
+		when(vulcanizacionService.save(any())).thenReturn(vulcanizacion1);
+
+		//When
+		mvc.perform(post("/apiEstacionamiento/servioVulcanizacion")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(vulcanizacion1)))
+
+				//then
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
+	}
+        
+        
+        
 	@Test
 	void createVulcaTestNoValido() throws  Exception {
 

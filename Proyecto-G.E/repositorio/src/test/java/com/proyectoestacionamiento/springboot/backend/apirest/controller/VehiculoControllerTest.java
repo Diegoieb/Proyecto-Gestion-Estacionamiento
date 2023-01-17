@@ -1,18 +1,9 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.controller;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Cliente;
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Vehiculo;
+import com.proyectoestacionamiento.springboot.backend.apirest.service.IVehiculoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +13,16 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Cliente;
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Vehiculo;
-import com.proyectoestacionamiento.springboot.backend.apirest.service.IClienteService;
-import com.proyectoestacionamiento.springboot.backend.apirest.service.IVehiculoService;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 //para hacer las llamadas http
@@ -48,8 +44,13 @@ public class VehiculoControllerTest {
 	
 	@BeforeEach
 	void setup() {
+<<<<<<< HEAD
 		cliente1= new Cliente(1, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
 		vehiculo1= new Vehiculo(1, "DL-DZ-31","rojo","chery", true,cliente1);
+=======
+		cliente1 = new Cliente(1, "Gabriel", 128718728, "Calle tu mama", "1111111-1", new HashSet<Vehiculo>());
+		vehiculo1 = new Vehiculo(1, "DL-DZ-31", "rojo", "chery", true, cliente1);
+>>>>>>> ba55b4c1e6e162a2dc36d21bb4e4caaa123fa298
 		vehiculo2= new Vehiculo(1, "DL-DZ-32","azul","azurian", false,cliente1);
 
 		//para cuando quieres escribir en el json

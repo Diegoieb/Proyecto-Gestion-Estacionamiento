@@ -63,7 +63,7 @@ public class ServicioVulcanizacion extends Servicio{
 
 
 
-	public ServicioVulcanizacion(Long id, boolean ocupado, int precio, Estacionamiento estacionamiento,
+	public ServicioVulcanizacion(int id, boolean ocupado, int precio, Estacionamiento estacionamiento,
 			Trabajador trabajador) {
 		super(id);
 		this.ocupado = ocupado;
@@ -77,7 +77,7 @@ public class ServicioVulcanizacion extends Servicio{
 		// TODO Auto-generated constructor stub
 	}
 
-	public ServicioVulcanizacion(Long id) {
+	public ServicioVulcanizacion(int id) {
 		super(id);
 		// TODO Auto-generated constructor stub
 	}

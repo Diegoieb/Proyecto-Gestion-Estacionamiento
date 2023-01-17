@@ -49,7 +49,7 @@ public class ServicioBano extends Servicio {
 		this.trabajador = trabajador;
 	}
 
-	public ServicioBano(Long id, boolean ocupado, Estacionamiento estacionamiento, Trabajador trabajador) {
+	public ServicioBano(int id, boolean ocupado, Estacionamiento estacionamiento, Trabajador trabajador) {
 		super(id);
 		this.ocupado = ocupado;
 		this.estacionamiento = estacionamiento;
@@ -61,7 +61,7 @@ public class ServicioBano extends Servicio {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ServicioBano(Long id) {
+	public ServicioBano(int id) {
 		super(id);
 		// TODO Auto-generated constructor stub
 	}
