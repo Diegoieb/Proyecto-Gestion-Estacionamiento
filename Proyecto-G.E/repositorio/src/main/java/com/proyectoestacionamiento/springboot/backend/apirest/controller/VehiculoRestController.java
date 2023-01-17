@@ -44,6 +44,29 @@ public class VehiculoRestController {
 
     }
     
+    @PostMapping("/vehiculos/{id}")
+    public ResponseEntity<?> actualizarVehiculo(@RequestBody Vehiculo vehiculo) {
+        Map<String, Object> response = new HashMap<>();
+        Vehiculo vehiculo2, vehiculo3 = null;
+        int id = Math.toIntExact(vehiculo.getId());
+        try {
+            vehiculo2 = vehiculoService.findById(id);
+            vehiculo2.setPatente(vehiculo.getPatente());
+            vehiculo2.setColor(vehiculo.getColor());
+            vehiculo2.setMarca(vehiculo.getMarca());
+            vehiculo2.setAutomatico(vehiculo.getAutomatico());
+            vehiculo2.setCliente(vehiculo.getCliente());
+            vehiculo3 = vehiculoService.save(vehiculo2);
+            response.put("Ok", vehiculo3);// respuesta
+        } catch (Exception e) {
+            response.put("Mensaje", "Error al realizar la consulta en la base de datos " + e.getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+    }
+    
+    
+    
     @PostMapping("/vehiculos")
     public ResponseEntity<?> agregaVehiculo(@RequestBody Vehiculo vehiculo) {
         Map<String, Object> response = new HashMap<>();
