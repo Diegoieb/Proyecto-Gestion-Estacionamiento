@@ -60,11 +60,7 @@ public class VehiculoServiceTest {
 	 
 		@Test
 		void saveVehiculo() {
-<<<<<<< HEAD
 			Cliente cliente1 = new Cliente(1, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
-=======
-			Cliente cliente1 = new Cliente(1, "Gabriel", 128718728, "Calle tu mama", "1111111-1", new HashSet<Vehiculo>());
->>>>>>> ba55b4c1e6e162a2dc36d21bb4e4caaa123fa298
 			
 			//given
 
