@@ -79,7 +79,7 @@ public class ServicioVulcaServiceTest {
         //when
         ServicioVulcanizacion vulcaPrueba = vulcaService.save(service);
         //then
-        assertEquals(Long.valueOf(12), vulcaPrueba.getId());
+        assertEquals(12, vulcaPrueba.getId());
         assertEquals(190, vulcaPrueba.getPrecio());
 
         verify(vulcaRepository).save(any());
