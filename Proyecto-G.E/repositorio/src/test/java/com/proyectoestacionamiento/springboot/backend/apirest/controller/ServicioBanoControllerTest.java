@@ -60,8 +60,8 @@ public class ServicioBanoControllerTest {
 		
 		estacionamiento1= new Estacionamiento(1,true,100,23);
 		
-		bano1= new ServicioBano(1l,true,estacionamiento1,trabajador1);
-		bano2= new ServicioBano(2l,false,estacionamiento1,trabajador1);
+		bano1= new ServicioBano(1,true,estacionamiento1,trabajador1);
+		bano2= new ServicioBano(2,false,estacionamiento1,trabajador1);
 		//para cuando quieres escribir en el json
 		objectMapper = new ObjectMapper();
 	}

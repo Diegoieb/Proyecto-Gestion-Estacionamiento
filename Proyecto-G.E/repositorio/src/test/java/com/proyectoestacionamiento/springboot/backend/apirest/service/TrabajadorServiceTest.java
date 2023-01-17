@@ -72,7 +72,7 @@ public class TrabajadorServiceTest {
 		//when
 		Trabajador trabajadorPrueba = trabajadorService.save(alguien);
 		//then
-		assertEquals(Long.valueOf(3), trabajadorPrueba.getId());
+		assertEquals(3, trabajadorPrueba.getId());
 		assertEquals("Mateo", trabajadorPrueba.getNombre());
 
 		verify(trabajadorRepository).save(any());

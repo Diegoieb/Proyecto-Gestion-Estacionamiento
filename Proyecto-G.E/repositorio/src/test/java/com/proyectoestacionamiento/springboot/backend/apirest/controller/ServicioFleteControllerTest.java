@@ -57,8 +57,8 @@ public class ServicioFleteControllerTest {
 	void setup() {
 		trabajador1= new Trabajador(1, "Esteban",128718728 ,"Calle tu mama", "1111111-1");
 		estacionamiento1= new Estacionamiento(1,true,100,23);
-		flete1= new ServicioFlete(1l,true,1000,estacionamiento1,trabajador1);
-		flete2= new ServicioFlete(2l,false,100,estacionamiento1,trabajador1);
+		flete1= new ServicioFlete(1,true,1000,estacionamiento1,trabajador1);
+		flete2= new ServicioFlete(2,false,100,estacionamiento1,trabajador1);
 		//para cuando quieres escribir en el json
 		objectMapper = new ObjectMapper();
 	}
