@@ -1,5 +1,7 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
@@ -7,35 +9,40 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "reseña")
 public class Reseña {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @NotEmpty
-    private String contenidoReseña;
+    private String contenido;
+
+    @JsonIgnoreProperties(value = {"reseñas", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @ManyToOne()
-    @JoinColumn(name = "id_estacionamient", referencedColumnName = "id")
+    @JoinColumn(name = "id_estacionamiento", referencedColumnName = "id")
     private Estacionamiento estacionamiento;
+
+    @JsonIgnoreProperties(value = {"reseñas", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @OneToOne()
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private Cliente cliente;
 
-    public Reseña(@NotEmpty String contenidoReseña, @NotEmpty Cliente cliente, @NotEmpty Estacionamiento estacionamiento) {
+    public Reseña(@NotEmpty String contenido, @NotEmpty Cliente cliente, @NotEmpty Estacionamiento estacionamiento) {
         this.cliente = cliente;
         this.estacionamiento = estacionamiento;
-        this.contenidoReseña = contenidoReseña;
+        this.contenido = contenido;
     }
 
     public Reseña() {
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public String getContenidoReseña() {
-        return contenidoReseña;
+    public String getContenido() {
+        return contenido;
     }
 
     public Cliente getCliente() {

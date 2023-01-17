@@ -11,7 +11,7 @@ public interface IReseñaService {
 
 	ReseñaRespuesta crearReseña(Reseña reseña);
 
-	ReseñaRespuesta encontrarReseñaPorId(Integer id);
+	ReseñaRespuesta encontrarReseñaPorId(Integer id) throws Exception;
 
 	void borrarReseñaPorId(Integer id);
 }

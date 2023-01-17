@@ -30,8 +30,8 @@ public class ReseñaServiceImpl implements IReseñaService {
     }
 
     @Override
-    public ReseñaRespuesta encontrarReseñaPorId(Integer id) {
-        Reseña resultadoRepositorio = reseñaRepository.findById(id).orElse(null);
+    public ReseñaRespuesta encontrarReseñaPorId(Integer id) throws Exception {
+        Reseña resultadoRepositorio = reseñaRepository.findById(id).orElseThrow(() -> new Exception(String.format("Reseña para el id: %s no encontrado.\n", id)));
         return getReseñaRespuesta(resultadoRepositorio);
     }
 
@@ -44,7 +44,7 @@ public class ReseñaServiceImpl implements IReseñaService {
     private static ReseñaRespuesta getReseñaRespuesta(Reseña resultadoGuardado) {
         ReseñaRespuesta respuesta = new ReseñaRespuesta();
         respuesta.setId(resultadoGuardado.getId());
-        respuesta.setContenidoReseña(resultadoGuardado.getContenidoReseña());
+        respuesta.setContenidoReseña(resultadoGuardado.getContenido());
         respuesta.setNombreCliente(resultadoGuardado.getCliente().getNombre());
         respuesta.setIdEstacionamiento(resultadoGuardado.getEstacionamiento().getIdEstacionamiento());
         return respuesta;

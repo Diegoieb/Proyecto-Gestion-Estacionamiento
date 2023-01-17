@@ -1,17 +1,17 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.models.rest;
 
 public class ReseñaRespuesta {
-    private Long id;
+    private int id;
     private String contenidoReseña;
     private int idEstacionamiento;
 
     private String nombreCliente;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

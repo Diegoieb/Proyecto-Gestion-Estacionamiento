@@ -1,8 +1,12 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity 
 @Table(name = "estacionamiento") 
@@ -26,9 +30,9 @@ public class Estacionamiento implements Serializable{
 	private int precioPorMinuto;
 
 
-	//private ArrayList<Reseña> reseñas;
-
-	//falta la relacion
+	@JsonIgnoreProperties(value = {"estacionamiento", "hibernateLazyInitializer", "handler"}, allowSetters = true)
+	@OneToMany(mappedBy = "estacionamiento")
+	private Set<Reseña> reseñas = new HashSet<>();
 
 	public int getIdEstacionamiento() {
 		return id;
@@ -62,13 +66,22 @@ public class Estacionamiento implements Serializable{
 		this.precioPorMinuto = precioPorMinuto;
 	}
 
+	public Set<Reseña> getReseñas() {
+		return reseñas;
+	}
+
+	public void setReseñas(Set<Reseña> reseñas) {
+		this.reseñas = reseñas;
+	}
+
 	public Estacionamiento(int idEstacionamiento, boolean discapacitado, @NotNull int cantidad,
-			@NotNull int precioPorMinuto) {
+						   @NotNull int precioPorMinuto, Set<Reseña> reseñas) {
 		super();
 		this.id = idEstacionamiento;
 		this.discapacitado = discapacitado;
 		this.cantidad = cantidad;
 		this.precioPorMinuto = precioPorMinuto;
+		this.reseñas = reseñas;
 	}
 
 	public Estacionamiento() {

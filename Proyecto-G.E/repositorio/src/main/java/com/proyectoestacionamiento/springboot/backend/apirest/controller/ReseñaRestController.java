@@ -32,7 +32,7 @@ public class ReseñaRestController {
     }
 
     @GetMapping("/{id}")
-    public ReseñaRespuesta obtenerReseñaPorId(@PathVariable int id) {
+    public ReseñaRespuesta obtenerReseñaPorId(@PathVariable int id) throws Exception {
         return reseñaService.encontrarReseñaPorId(id);
 
     }
@@ -42,6 +42,5 @@ public class ReseñaRestController {
     public void borrarReseñaPorId(@PathVariable int id) {
         reseñaService.borrarReseñaPorId(id);
     }
-
 
 }
