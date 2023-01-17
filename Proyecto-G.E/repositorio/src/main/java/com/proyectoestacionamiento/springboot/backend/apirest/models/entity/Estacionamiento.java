@@ -1,14 +1,12 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.models.entity;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity 
 @Table(name = "estacionamiento") 
@@ -19,21 +17,22 @@ public class Estacionamiento implements Serializable{
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "discapacitados")
 	private boolean discapacitado;
-	
+
 	@NotNull
 	@Column(name = "capacidad")
 	private int cantidad;
-	
+
 	@NotNull
 	@Column(name = "precio_por_minuto")
 	private int precioPorMinuto;
-	
-	//falta la relacion 
-	
-	
+
+
+	@JsonIgnoreProperties(value = {"estacionamiento", "hibernateLazyInitializer", "handler"}, allowSetters = true)
+	@OneToMany(mappedBy = "estacionamiento")
+	private Set<Reseña> reseñas = new HashSet<>();
 
 	public int getIdEstacionamiento() {
 		return id;
@@ -67,13 +66,22 @@ public class Estacionamiento implements Serializable{
 		this.precioPorMinuto = precioPorMinuto;
 	}
 
+	public Set<Reseña> getReseñas() {
+		return reseñas;
+	}
+
+	public void setReseñas(Set<Reseña> reseñas) {
+		this.reseñas = reseñas;
+	}
+
 	public Estacionamiento(int idEstacionamiento, boolean discapacitado, @NotNull int cantidad,
-			@NotNull int precioPorMinuto) {
+						   @NotNull int precioPorMinuto, Set<Reseña> reseñas) {
 		super();
 		this.id = idEstacionamiento;
 		this.discapacitado = discapacitado;
 		this.cantidad = cantidad;
 		this.precioPorMinuto = precioPorMinuto;
+		this.reseñas = reseñas;
 	}
 
 	public Estacionamiento() {

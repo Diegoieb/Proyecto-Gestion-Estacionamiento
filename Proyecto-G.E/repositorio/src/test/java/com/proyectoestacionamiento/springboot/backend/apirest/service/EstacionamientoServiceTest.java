@@ -33,10 +33,10 @@ public class EstacionamientoServiceTest {
 	
 	@BeforeEach
 	void setup() {
-		
-		estacionamiento1 = new Estacionamiento();
-		estacionamiento2 = new Estacionamiento();
-	}
+
+        estacionamiento1 = new Estacionamiento();
+        estacionamiento2 = new Estacionamiento();
+    }
 	
     @Test
     void findAllEstacionamientos() {
@@ -59,11 +59,11 @@ public class EstacionamientoServiceTest {
     public void testObtenerEstacionamientosDiscapacitados() {
         // GIVEN
         List<Estacionamiento> listaEstacionamientos = new ArrayList<>();
-        listaEstacionamientos.add(new Estacionamiento(1, true, 30, 100));
-        listaEstacionamientos.add(new Estacionamiento(2, false, 31, 100));
-        listaEstacionamientos.add(new Estacionamiento(3, true, 32, 100));
-        listaEstacionamientos.add(new Estacionamiento(4, false, 33, 100));
-        listaEstacionamientos.add(new Estacionamiento(5, true, 34, 100));
+        listaEstacionamientos.add(new Estacionamiento(1, true, 30, 100, null));
+        listaEstacionamientos.add(new Estacionamiento(2, false, 31, 100, null));
+        listaEstacionamientos.add(new Estacionamiento(3, true, 32, 100, null));
+        listaEstacionamientos.add(new Estacionamiento(4, false, 33, 100, null));
+        listaEstacionamientos.add(new Estacionamiento(5, true, 34, 100, null));
         when(estacionamientoRepository.findAll()).thenReturn(listaEstacionamientos);
 
         // WHEN

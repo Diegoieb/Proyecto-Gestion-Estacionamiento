@@ -1,5 +1,10 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Estacionamiento;
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.ServicioVulcanizacion;
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Trabajador;
+import com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioVulcanizacionService;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
@@ -24,12 +29,15 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Estacionamiento;
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.ServicioVulcanizacion;
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Trabajador;
-import com.proyectoestacionamiento.springboot.backend.apirest.service.IEstacionamientoService;
-import com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioVulcanizacionService;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 //para hacer las llamadas http
 @WebMvcTest(ServicioVulcanizacionRestController.class)
@@ -57,10 +65,10 @@ public class ServicioVulcaControllerTest {
 	
 	@BeforeEach
 	void setup() {
-		trabajador1= new Trabajador(1, "Esteban",128718728 ,"Calle tu mama", "1111111-1");
-		estacionamiento1= new Estacionamiento(1,true,100,23);
-		vulcanizacion1= new ServicioVulcanizacion(1,true,1000,estacionamiento1,trabajador1);
-		vulcanizacion2= new ServicioVulcanizacion(2,false,100,estacionamiento1,trabajador1);
+		trabajador1 = new Trabajador(1, "Esteban", 128718728, "Calle tu mama", "1111111-1");
+		estacionamiento1 = new Estacionamiento(1, true, 100, 23, null);
+		vulcanizacion1 = new ServicioVulcanizacion(1, true, 1000, estacionamiento1, trabajador1);
+		vulcanizacion2 = new ServicioVulcanizacion(2, false, 100, estacionamiento1, trabajador1);
 		//para cuando quieres escribir en el json
 		objectMapper = new ObjectMapper();
 	}
