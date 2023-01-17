@@ -58,8 +58,8 @@ public class ServicioEscaneoControllerTest {
 		
 		estacionamiento1= new Estacionamiento(1,true,100,23);
 		
-		escaneo1= new ServicioEscaneo(1l,true,1000,estacionamiento1,trabajador1);
-		escaneo2= new ServicioEscaneo(2l,false,100,estacionamiento1,trabajador1);
+		escaneo1= new ServicioEscaneo(1,true,1000,estacionamiento1,trabajador1);
+		escaneo2= new ServicioEscaneo(2,false,100,estacionamiento1,trabajador1);
 		//para cuando quieres escribir en el json
 		objectMapper = new ObjectMapper();
 	}

@@ -71,4 +71,18 @@ public class ServicioVulcanizacionRestController {
         }
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
+    
+    @DeleteMapping("/servioVulcanizacion/{id}")
+    public ResponseEntity<?> eliminarPersona(@PathVariable int id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+        	servicioVulcanizacion.delete(id);
+            response.put("Ok", "servicio eliminado");
+        } catch (Exception e) {
+            response.put("Mensaje", "Error al realizar la consulta en la base de datos " + e.getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+
+    }
 }

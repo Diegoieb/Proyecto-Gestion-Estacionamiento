@@ -1,8 +1,10 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.controller;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -154,5 +156,16 @@ public class ServicioVulcaControllerTest {
 
 	}
 	
-	
+	@Test
+	void deleteVulcaTest() throws Exception {
+
+		//Given
+		doNothing().when(vulcanizacionService).delete(any());
+
+		//when
+		mvc.perform(delete("/apiEstacionamiento/servioVulcanizacion/1")
+						.contentType(MediaType.APPLICATION_JSON))
+				//then
+				.andExpect(status().isOk());
+	}
 }

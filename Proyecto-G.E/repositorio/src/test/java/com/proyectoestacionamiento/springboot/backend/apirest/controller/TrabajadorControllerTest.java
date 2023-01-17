@@ -1,8 +1,10 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.controller;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -127,6 +129,19 @@ public class TrabajadorControllerTest {
 				.andExpect(status().isBadRequest())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
+	}
+	
+	@Test
+	void deleteTrabajadorTest() throws Exception {
+
+		//Given
+		doNothing().when(trabajadorService).delete(any());
+
+		//when
+		mvc.perform(delete("/apiEstacionamiento/trabajadores/1")
+						.contentType(MediaType.APPLICATION_JSON))
+				//then
+				.andExpect(status().isOk());
 	}
 
 }

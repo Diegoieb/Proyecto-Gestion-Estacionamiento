@@ -44,13 +44,13 @@ public class VehiculoControllerTest {
 	
 	@BeforeEach
 	void setup() {
-<<<<<<< HEAD
+
 		cliente1= new Cliente(1, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
 		vehiculo1= new Vehiculo(1, "DL-DZ-31","rojo","chery", true,cliente1);
-=======
+
 		cliente1 = new Cliente(1, "Gabriel", 128718728, "Calle tu mama", "1111111-1", new HashSet<Vehiculo>());
 		vehiculo1 = new Vehiculo(1, "DL-DZ-31", "rojo", "chery", true, cliente1);
->>>>>>> ba55b4c1e6e162a2dc36d21bb4e4caaa123fa298
+
 		vehiculo2= new Vehiculo(1, "DL-DZ-32","azul","azurian", false,cliente1);
 
 		//para cuando quieres escribir en el json
