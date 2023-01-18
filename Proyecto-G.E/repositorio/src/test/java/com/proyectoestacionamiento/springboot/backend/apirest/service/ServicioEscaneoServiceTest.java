@@ -1,7 +1,10 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.service;
 
+import static java.lang.Integer.valueOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -59,6 +62,13 @@ public class ServicioEscaneoServiceTest {
         assertFalse(escaneosPrueba.isEmpty());
         assertEquals(2,escaneosPrueba.size());
         verify(escaneoRepository).findAll();
+    }
+    
+    @Test
+    void DeleleVehiculorTest() {
+        doNothing().when(escaneoRepository).deleteById(any());
+        escaneoService.delete(valueOf(1));
+        verify(escaneoRepository).deleteById(any());
     }
 
 }

@@ -18,8 +18,10 @@ import java.util.HashSet;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -44,7 +46,7 @@ public class VehiculoControllerTest {
 	
 	@BeforeEach
 	void setup() {
-<<<<<<< HEAD
+
 
 		cliente1= new Cliente(1, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
 		vehiculo1= new Vehiculo(1, "DL-DZ-31","rojo","chery", true,cliente1);
@@ -52,12 +54,12 @@ public class VehiculoControllerTest {
 		cliente1 = new Cliente(1, "Gabriel", 128718728, "Calle tu mama", "1111111-1", new HashSet<Vehiculo>());
 		vehiculo1 = new Vehiculo(1, "DL-DZ-31", "rojo", "chery", true, cliente1);
 
-=======
+
 		cliente1= new Cliente(1, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
 		vehiculo1= new Vehiculo(1, "DL-DZ-31","rojo","chery", true,cliente1);
 		cliente1 = new Cliente(1, "Gabriel", 128718728, "Calle tu mama", "1111111-1", new HashSet<Vehiculo>());
 		vehiculo1 = new Vehiculo(1, "DL-DZ-31", "rojo", "chery", true, cliente1);
->>>>>>> 18faae56c6bc494fd7b2f1f9eca385c50cc15ea3
+
 		vehiculo2= new Vehiculo(1, "DL-DZ-32","azul","azurian", false,cliente1);
 
 		//para cuando quieres escribir en el json
@@ -136,4 +138,19 @@ public class VehiculoControllerTest {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
 	}
+	
+	
+	@Test
+	void deleteTrabajadorTest() throws Exception {
+
+		//Given
+		doNothing().when(vehiculoService).delete(any());
+
+		//when
+		mvc.perform(delete("/apiEstacionamiento/vehiculos/1")
+						.contentType(MediaType.APPLICATION_JSON))
+				//then
+				.andExpect(status().isOk());
+	}
+
 }

@@ -13,9 +13,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import static java.lang.Integer.valueOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -81,4 +83,12 @@ public class VehiculoServiceTest {
 
 			verify(vehiculoRepository).save(any());
 		}
+		
+	    @Test
+	    void DeleleVehiculorTest() {
+	        doNothing().when(vehiculoRepository).deleteById(any());
+	        vehiculoService.delete(valueOf(1));
+	        verify(vehiculoRepository).deleteById(any());
+	    }
+
 }
