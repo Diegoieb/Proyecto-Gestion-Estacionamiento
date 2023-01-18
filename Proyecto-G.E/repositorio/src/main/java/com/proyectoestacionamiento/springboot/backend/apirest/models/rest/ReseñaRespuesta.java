@@ -2,7 +2,7 @@ package com.proyectoestacionamiento.springboot.backend.apirest.models.rest;
 
 public class ReseñaRespuesta {
     private int id;
-    private String contenidoReseña;
+    private String contenido;
     private int idEstacionamiento;
 
     private String nombreCliente;
@@ -15,12 +15,12 @@ public class ReseñaRespuesta {
         this.id = id;
     }
 
-    public String getContenidoReseña() {
-        return contenidoReseña;
+    public String getContenido() {
+        return contenido;
     }
 
-    public void setContenidoReseña(String contenidoReseña) {
-        this.contenidoReseña = contenidoReseña;
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
     }
 
     public int getIdEstacionamiento() {

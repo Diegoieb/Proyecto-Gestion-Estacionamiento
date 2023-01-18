@@ -44,7 +44,7 @@ public class ReseñaServiceImpl implements IReseñaService {
     private static ReseñaRespuesta getReseñaRespuesta(Reseña resultadoGuardado) {
         ReseñaRespuesta respuesta = new ReseñaRespuesta();
         respuesta.setId(resultadoGuardado.getId());
-        respuesta.setContenidoReseña(resultadoGuardado.getContenido());
+        respuesta.setContenido(resultadoGuardado.getContenido());
         respuesta.setNombreCliente(resultadoGuardado.getCliente().getNombre());
         respuesta.setIdEstacionamiento(resultadoGuardado.getEstacionamiento().getIdEstacionamiento());
         return respuesta;
