@@ -78,4 +78,26 @@ public class VehiculoServiceTest {
 
 			verify(vehiculoRepository).save(any());
 		}
+        @Test
+		void updateVehiculo() {
+			Cliente cliente1 = new Cliente(1, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
+			
+			//given
+
+			vehiculo1= new Vehiculo(1, "DL-DZ-31","rojo","chery", true,cliente1);
+			when(vehiculoRepository.save(any())).then(invocation -> {
+				Vehiculo a = invocation.getArgument(0);
+				return a;
+			});
+
+			//when
+			Vehiculo vehiculoPrueba = vehiculoService.save(vehiculo1);
+                        
+                        vehiculoPrueba.setPatente("AB-AB-AB");
+			//then
+			assertEquals(Long.valueOf(1), vehiculoPrueba.getId());
+			assertEquals("AB-AB-AB", vehiculoPrueba.getPatente());
+
+			verify(vehiculoRepository).save(any());
+		}
 }

@@ -60,7 +60,7 @@ public class ServicioVulcaServiceTest {
         assertEquals(2,vulcasPrueba.size());
         verify(vulcaRepository).findAll();
     }
-
+    
     @Test
     void saveVulca() {
 
@@ -80,6 +80,27 @@ public class ServicioVulcaServiceTest {
         assertEquals(12, vulcaPrueba.getId());
         assertEquals(190, vulcaPrueba.getPrecio());
 
+        verify(vulcaRepository).save(any());
+    }
+
+
+    @Test
+    void modifyVulca() {
+
+        //given
+        ServicioVulcanizacion service = new ServicioVulcanizacion(12, false, 190, new Estacionamiento(6,false, 2, 34),new Trabajador());
+        when(vulcaRepository.save(any())).then(invocation -> {
+            ServicioVulcanizacion a = invocation.getArgument(0);
+
+            a.setId(12);
+            return a;
+        });
+        //when
+        ServicioVulcanizacion vulcaPrueba = vulcaService.save(service);
+        vulcaPrueba.setId(10);
+        //then
+        assertEquals(10, vulcaPrueba.getId());
+        assertEquals(190, vulcaPrueba.getPrecio());
         verify(vulcaRepository).save(any());
     }
 

@@ -26,7 +26,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Estacionamiento;
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.ServicioVulcanizacion;
 import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Trabajador;
-import com.proyectoestacionamiento.springboot.backend.apirest.service.IEstacionamientoService;
 import com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioVulcanizacionService;
 
 //para hacer las llamadas http
@@ -59,6 +58,7 @@ public class ServicioVulcaControllerTest {
 		estacionamiento1= new Estacionamiento(1,true,100,23);
 		vulcanizacion1= new ServicioVulcanizacion(1,true,1000,estacionamiento1,trabajador1);
 		vulcanizacion2= new ServicioVulcanizacion(2,false,100,estacionamiento1,trabajador1);
+                
 		//para cuando quieres escribir en el json
 		objectMapper = new ObjectMapper();
 	}
@@ -120,20 +120,35 @@ public class ServicioVulcaControllerTest {
         
         @Test
 	void modifyVulcaTest() throws  Exception {
-
 		//Given
-
 		when(vulcanizacionService.save(any())).thenReturn(vulcanizacion1);
-
 		//When
-		mvc.perform(post("/apiEstacionamiento/servioVulcanizacion")
+                mvc.perform(post("/apiEstacionamiento/servioVulcanizacion")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(vulcanizacion1)))
+				//then
+				.andExpect(status().isCreated())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON));   
+                vulcanizacion1.setPrecio(500);
+		mvc.perform(post("/apiEstacionamiento/servioVulcanizacion/")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(vulcanizacion1)))
+				//then
+				.andExpect(status().isCreated())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
+	}
+        
+        @Test
+	void modifyVulcaTestNoValido() throws  Exception {
+                when(vulcanizacionService.save(any())).thenThrow(new DataAccessException("...") {});
+		//When
+                mvc.perform(post("/apiEstacionamiento/servioVulcanizacion/1")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(vulcanizacion1)))
 
 				//then
-				.andExpect(status().isOk())
+				.andExpect(status().isNotFound())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
-
 	}
         
         
