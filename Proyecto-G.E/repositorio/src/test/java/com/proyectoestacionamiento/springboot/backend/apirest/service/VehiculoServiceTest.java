@@ -13,9 +13,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import static java.lang.Integer.valueOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -60,8 +62,11 @@ public class VehiculoServiceTest {
 	 
 		@Test
 		void saveVehiculo() {
+
 			Cliente cliente1 = new Cliente(1, "Gabriel",128718728 ,"Calle tu mama", "1111111-1",new HashSet<Vehiculo>());
-			
+
+			Cliente cliente2 = new Cliente(1, "Gabriel", 128718728, "Calle tu mama", "1111111-1", new HashSet<Vehiculo>());
+
 			//given
 
 			vehiculo1= new Vehiculo(1, "DL-DZ-31","rojo","chery", true,cliente1);
@@ -100,4 +105,12 @@ public class VehiculoServiceTest {
 
 			verify(vehiculoRepository).save(any());
 		}
+		
+	    @Test
+	    void DeleleVehiculorTest() {
+	        doNothing().when(vehiculoRepository).deleteById(any());
+	        vehiculoService.delete(valueOf(1));
+	        verify(vehiculoRepository).deleteById(any());
+	    }
+
 }

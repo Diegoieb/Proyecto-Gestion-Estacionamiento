@@ -1,8 +1,10 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.service;
 
+import static java.lang.Integer.valueOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -77,5 +79,12 @@ public class TrabajadorServiceTest {
 
 		verify(trabajadorRepository).save(any());
 	}
+	
+    @Test
+    void DeleleTrabajadorTest() {
+        doNothing().when(trabajadorRepository).deleteById(any());
+        trabajadorService.delete(valueOf(1));
+        verify(trabajadorRepository).deleteById(any());
+    }
 
 }
