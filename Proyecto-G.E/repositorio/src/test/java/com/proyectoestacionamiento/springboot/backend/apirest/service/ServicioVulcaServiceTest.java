@@ -100,7 +100,7 @@ public class ServicioVulcaServiceTest {
     void modifyVulca() {
 
         //given
-        ServicioVulcanizacion service = new ServicioVulcanizacion(12, false, 190, new Estacionamiento(6,false, 2, 34),new Trabajador());
+        ServicioVulcanizacion service = new ServicioVulcanizacion(12, false, 190, new Estacionamiento(6, false, 2, 34, null), new Trabajador());
         when(vulcaRepository.save(any())).then(invocation -> {
             ServicioVulcanizacion a = invocation.getArgument(0);
 
