@@ -101,7 +101,44 @@ public class VehiculoControllerTest {
 
         verify(vehiculoService).findAll();
     }
-	
+    
+    
+	@Test
+	void modificarVehiculoTest() throws  Exception {
+		//Given
+		when(vehiculoService.save(any())).thenReturn(vehiculo1);
+                mvc.perform(post("/apiEstacionamiento/vehiculos")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(vehiculo1)))
+
+				//then
+				.andExpect(status().isCreated())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.vehiculo.patente").value("DL-DZ-31"));
+                
+                vehiculo1.setPatente("AB-AB-AB");
+		//When
+		mvc.perform(post("/apiEstacionamiento/vehiculos")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(vehiculo1)))
+				//then
+				.andExpect(status().isCreated())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.vehiculo.patente").value("AB-AB-AB"));
+	}
+        
+        @Test
+	void modificarVehiculoTestNoValido() throws  Exception {
+		//Given
+		when(vehiculoService.save(any())).thenReturn(vehiculo1);
+		//When
+		mvc.perform(post("/apiEstacionamiento/vehiculos/1")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(vehiculo1)))
+				//then
+				.andExpect(status().isNotFound())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
+	}
 	
 	//save()
 

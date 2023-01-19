@@ -64,7 +64,7 @@ public class ServicioVulcanizacionRestController {
         ServicioVulcanizacion servicioVulcanizacion1= null;
         try{
             servicioVulcanizacion1= servicioVulcanizacion.save(servicioVulcanizacion2);
-            response.put("trabajador", servicioVulcanizacion1);
+            response.put("ServicioVulcanizacion", servicioVulcanizacion1);
         }catch(DataAccessException e){
             response.put("Mensaje", "Error al realizar la consulta en la base de datos"+ e.getMessage());
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);

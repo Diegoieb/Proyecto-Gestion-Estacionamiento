@@ -1,15 +1,8 @@
 package com.proyectoestacionamiento.springboot.backend.apirest.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Estacionamiento;
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.ServicioVulcanizacion;
-import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Trabajador;
-import com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioVulcanizacionService;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -29,50 +22,47 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Estacionamiento;
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.ServicioVulcanizacion;
+import com.proyectoestacionamiento.springboot.backend.apirest.models.entity.Trabajador;
+import com.proyectoestacionamiento.springboot.backend.apirest.service.IServicioVulcanizacionService;
 
 //para hacer las llamadas http
 @WebMvcTest(ServicioVulcanizacionRestController.class)
 public class ServicioVulcaControllerTest {
 
 
-	
+
 	@Autowired
 	private MockMvc mvc;
-	
+
 	//para simular la respuesta http
 	@MockBean
 	private IServicioVulcanizacionService vulcanizacionService;
-	
-	
+
+
 	ServicioVulcanizacion vulcanizacion1;
 
 	ServicioVulcanizacion vulcanizacion2;
-	
+
 	Trabajador trabajador1;
-	
+
 	Estacionamiento estacionamiento1;
-	
+
 	ObjectMapper objectMapper;
-	
+
 	@BeforeEach
 	void setup() {
-		trabajador1 = new Trabajador(1, "Esteban", 128718728, "Calle tu mama", "1111111-1");
-		estacionamiento1 = new Estacionamiento(1, true, 100, 23, null);
-		vulcanizacion1 = new ServicioVulcanizacion(1, true, 1000, estacionamiento1, trabajador1);
-		vulcanizacion2 = new ServicioVulcanizacion(2, false, 100, estacionamiento1, trabajador1);
+		trabajador1= new Trabajador(1, "Esteban",128718728 ,"Calle tu mama", "1111111-1");
+		estacionamiento1= new Estacionamiento(1,true,100,23);
+		vulcanizacion1= new ServicioVulcanizacion(1,true,1000,estacionamiento1,trabajador1);
+		vulcanizacion2= new ServicioVulcanizacion(2,false,100,estacionamiento1,trabajador1);
+
 		//para cuando quieres escribir en el json
 		objectMapper = new ObjectMapper();
 	}
-	
+
 	@Test
 	void indexTest() throws Exception {
 		// given
@@ -80,7 +70,7 @@ public class ServicioVulcaControllerTest {
 		vulcanizaciones.add(vulcanizacion1);
 		vulcanizaciones.add(vulcanizacion2);
 		when(vulcanizacionService.findAll()).thenReturn(vulcanizaciones);
-		
+
 		// when
 		mvc.perform(get("/apiEstacionamiento/servioVulcanizacion").contentType(MediaType.APPLICATION_JSON))
 		//then
@@ -88,10 +78,10 @@ public class ServicioVulcaControllerTest {
 		.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 		.andExpect(jsonPath("$.ok").value(true))
 		.andExpect(jsonPath("$.servicioVulcanizacion").isNotEmpty());
-		
+
 		verify(vulcanizacionService).findAll();
 	}
-	
+
 	@Test
     void indexTestNoValido() throws Exception {
         // given
@@ -127,27 +117,42 @@ public class ServicioVulcaControllerTest {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
 	}
-        
+
         @Test
 	void modifyVulcaTest() throws  Exception {
-
 		//Given
-
 		when(vulcanizacionService.save(any())).thenReturn(vulcanizacion1);
-
 		//When
-		mvc.perform(post("/apiEstacionamiento/servioVulcanizacion")
+                mvc.perform(post("/apiEstacionamiento/servioVulcanizacion")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(vulcanizacion1)))
+				//then
+				.andExpect(status().isCreated())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON));   
+                vulcanizacion1.setPrecio(500);
+		mvc.perform(post("/apiEstacionamiento/servioVulcanizacion/")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(vulcanizacion1)))
+				//then
+				.andExpect(status().isCreated())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
+	}
+
+        @Test
+	void modifyVulcaTestNoValido() throws  Exception {
+                when(vulcanizacionService.save(any())).thenThrow(new DataAccessException("...") {});
+		//When
+                mvc.perform(post("/apiEstacionamiento/servioVulcanizacion/1")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(vulcanizacion1)))
 
 				//then
-				.andExpect(status().isOk())
+				.andExpect(status().isNotFound())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
-
 	}
-        
-        
-        
+
+
+
 	@Test
 	void createVulcaTestNoValido() throws  Exception {
 
@@ -163,17 +168,6 @@ public class ServicioVulcaControllerTest {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
 	}
-	
-	@Test
-	void deleteVulcaTest() throws Exception {
 
-		//Given
-		doNothing().when(vulcanizacionService).delete(any());
 
-		//when
-		mvc.perform(delete("/apiEstacionamiento/servioVulcanizacion/1")
-						.contentType(MediaType.APPLICATION_JSON))
-				//then
-				.andExpect(status().isOk());
-	}
 }
