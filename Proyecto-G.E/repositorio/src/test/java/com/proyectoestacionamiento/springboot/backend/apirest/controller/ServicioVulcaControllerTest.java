@@ -55,7 +55,7 @@ public class ServicioVulcaControllerTest {
 	@BeforeEach
 	void setup() {
 		trabajador1= new Trabajador(1, "Esteban",128718728 ,"Calle tu mama", "1111111-1");
-		estacionamiento1= new Estacionamiento(1,true,100,23);
+		estacionamiento1= new Estacionamiento(1,true,100,23,null);
 		vulcanizacion1= new ServicioVulcanizacion(1,true,1000,estacionamiento1,trabajador1);
 		vulcanizacion2= new ServicioVulcanizacion(2,false,100,estacionamiento1,trabajador1);
 
